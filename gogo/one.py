@@ -1,5 +1,5 @@
 maxnub=9;
-
+#写的啥啊这是
 def inp():
     num=0
     num =int(input("输入的要是数字哦："))

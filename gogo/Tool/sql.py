@@ -20,15 +20,14 @@ class sqldb:
         )
         return  connect
 
+
+#查方法
     def sel(self):
         connect=self.conn();
         sursor= connect.cursor();
         sursor.execute(self.sql)
 
-
-
-
-
+#增删改方法
     def iud(self):
         connect=self.conn();
         sursor= connect.cursor();
