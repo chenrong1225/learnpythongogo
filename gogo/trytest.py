@@ -1,5 +1,6 @@
 import xlrd
 #表格
+#为什么不行
 data = xlrd.open_workbook(r'C:\Users\Administrator\Desktop\新建 XLS 工作表.xls')
 table = data.sheets()[0]
 
