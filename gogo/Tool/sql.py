@@ -24,7 +24,7 @@ class sqldb:
         connect=self.conn();
         sursor= connect.cursor();
         sursor.execute(self.sql)
-        for row in sursor.fetchall():
+
 
 
 
