@@ -42,6 +42,7 @@ class sqldb:
         except:
             connect.rollback()
         print('已处理',sursor.rowcount,'条数据')
+        return sursor.rowcount
         connect.close()
 
 
