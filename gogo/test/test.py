@@ -1,9 +1,9 @@
-from flask import Flask,views,request,Blueprint,jsonify,abort
+from flask import request,Blueprint
 from flask_cors import CORS
-from gogo.all import errortool,tryTool,Code
-from gogo.all.Code import code
+from gogo.alltool import tryTool,Code
+from gogo.heiheihei import logininto
 import json
-from enum import Enum
+
 
 user=Blueprint('user',__name__)
 CORS(user, resources=r"/*")
@@ -15,34 +15,29 @@ def into():
         #password = request.form.get("'password");
         a=json.dumps(request.form)
         b=json.loads(a) #处理成json
-        print(b['user'])
         if((b['user'] =="")&(b['password']=="")):
-            print(code.NULL_NAME)
-            raise tryTool.apiException(return_code=code.NULL_NAME,status_code=400)
+            raise tryTool.apiExceptionerror(Code.code.NULL_NAME)
         else:
-            orture=test.intoor(**b)
-            if(orture['num']==0):
-                msg={'code':'0000','msg':orture['msg']}
-                return msg
+            orture=logininto.intoandlogin.intoor(**b)
+            if(orture==True):
+                print(orture,"是否有信息")
+                into=logininto.intoandlogin.intoor(**b)
+                if(into==True):
+                    print(orture,"是否注册成功")
+                    raise tryTool.apiExceptionerror(Code.code.WIN_CODE)
             else:
-                msg={'code':'0001','msg':orture['msg']}
-                return msg
+                raise tryTool.apiExceptionerror(Code.code.REPEAT_NAME)
 
 #登录接口 嘿嘿嘿
 @user.route('/login',methods=['POST'])
 def login():
         user = request.form.get("user");
         password = request.form.get("password");
-        test=logininto.intoandlogin(user,password)
-        re=test.loginyep()
-        if(re==1):
-         print("yep")
-         msg={'code':'0000','msg':'成功'}
-         return msg
+        re=logininto.intoandlogin.loginyep(user,password)
+        if(re==True):
+            raise tryTool.apiExceptionerror(Code.code.WIN_CODE)
         else:
-         print("没有数据要注册")
-         msg={'code':'0001','msg':'没有账号信息'}
-         return msg
+            raise tryTool.apiExceptionerror(Code.code.NO_INTOLOGIN)
 
 
 
