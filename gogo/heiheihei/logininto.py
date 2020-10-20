@@ -6,14 +6,13 @@ class intoandlogin:
 
 
     #注册
-    def logins(**map):
+    def register(**map):
             timedate=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             sqlinto="INSERT INTO testtb(name,pass,createTime,updatetime,num) VALUES('%s','%s','%s','%s',%s)"% \
             (map['user'],map['password'],timedate,timedate,'NULL')
-            print(map['name'],"aaa",map['password'])
             db=sql.sqldb(sqlinto)
             cou=db.iud();
-            if(len(cou)==0):
+            if(cou==None):
                 return False
             else:
                 return True
@@ -24,7 +23,6 @@ class intoandlogin:
             sqlinto="SELECT * FROM testtb WHERE name='%s'"%(map.get('user') )
             db=sql.sqldb(sqlinto)
             re=db.sel()
-            print(re)
             if(len(re)==0):
                 print("没有数据")
                 return  True
@@ -34,8 +32,8 @@ class intoandlogin:
 
     #登录，返回False没有数据无法登陆，返回true可以登陆
     def loginyep(user,password):
-            #print('ssss'+self.user)
-            sqlinto="SELECT * FROM testtb WHERE name='%s' and pass='%s'"%(user,password)
+            namede={}
+            sqlinto="SELECT name ,pass FROM testtb WHERE name='%s' and pass='%s'"%(user,password)
             db=sql.sqldb(sqlinto)
             re=db.sel()
             if(len(re)==0):
@@ -43,7 +41,10 @@ class intoandlogin:
                 return False
             else:
                 print("有数据")
-                return True
+                for a in re:
+                    namede={'name':a[0],'pass':a[1]}
+                print(namede)
+                return namede
 
 
     #查询用户名  ，判断旧密码前端判断
