@@ -1,15 +1,19 @@
-from flask import request,Blueprint
-from flask_cors import CORS
+from flask import request,redirect
 from gogo.alltool import tryTool,Code
 from gogo.heiheihei import logininto
 import json
+from . import user
+
+@user.route('/test')
+def testjump():
+    #通过函数名获取对应的url路径
+    url=url_for('into')
+    #重定向
+    return redirect(url)
 
 
-user=Blueprint('user',__name__)
-CORS(user, resources=r"/*")
-#test=logininto.intoandlogin()
 #注册有判断重复
-@user.route('/into',methods=['POST'])
+@user.route('/into',methods=['POST'],name='te_te')
 def into():
         #user = request.form.get("user");
         #password = request.form.get("'password");
@@ -28,7 +32,9 @@ def into():
             else:
                 raise tryTool.apiExceptionerror(Code.code.REPEAT_NAME)
 
-#登录接口 嘿嘿嘿
+
+
+#登录接口  methods默认get
 @user.route('/login',methods=['POST'])
 def login():
         user = request.form.get("user");
