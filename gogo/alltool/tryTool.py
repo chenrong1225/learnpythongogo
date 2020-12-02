@@ -1,6 +1,4 @@
-from flask import Blueprint,jsonify
-from gogo.alltool import Code
-from . import error
+from ..constants import Code
 
 
 class apiExceptionerror(Exception):
@@ -9,7 +7,7 @@ class apiExceptionerror(Exception):
         #Exception.__init__(self)
         self.message=massage
         if status_code is not  None:
-            self.status_code=Code[massage]
+            self.status_code= Code[massage]
         self.payload=payload
         self.data=data
     #构造要返回的错误代码和信息的字典
@@ -18,7 +16,7 @@ class apiExceptionerror(Exception):
         if(self.message.value is not None):
             self.status_code=self.message.value
         rv['status_code']=self.status_code
-        rv['message']=Code.code.J_MSG.value[self.message.name]
+        rv['message']= Code.code.J_MSG.value[self.message.name]
         if(self.data is not None):
             rv['data']=self.data
         return rv

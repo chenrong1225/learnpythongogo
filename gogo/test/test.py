@@ -1,8 +1,10 @@
 from flask import request,Blueprint
 from flask_cors import CORS
-from gogo.alltool import tryTool,Code
+from gogo.alltool import tryTool
+from gogo.constants import Code
 from gogo.heiheihei import logininto
 import json
+
 
 
 user=Blueprint('user',__name__)
@@ -24,7 +26,7 @@ def into():
                 into=logininto.intoandlogin.register(**b)
                 if(into!=True):
                     print(into,"是否注册成功")
-                    raise tryTool.apiExceptionerror(Code.code.WIN_CODE,data=into)
+                    raise tryTool.apiExceptionerror(Code.code.WIN_CODE, data=into)
             else:
                 raise tryTool.apiExceptionerror(Code.code.REPEAT_NAME)
 
@@ -36,7 +38,7 @@ def login():
         re=logininto.intoandlogin.loginyep(user,password)
         if(re!=False):
             print(re )
-            raise tryTool.apiExceptionerror(Code.code.WIN_CODE,data=re)
+            raise tryTool.apiExceptionerror(Code.code.WIN_CODE, data=re)
         else:
             raise tryTool.apiExceptionerror(Code.code.NO_INTOLOGIN)
 
